@@ -55,30 +55,31 @@ $(function name() {
                 if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 1 başarısız");
 
+                $.CommandTest.BaseCommandTest2();
             });
 
-            $.CommandTest.BaseCommandTest2();
         },
         BaseCommandTest2: function () {
+
             testNesne.testMiktari++;
             let data = "BaseCommand=mongo";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
 
                 if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 2 başarısız");
+                $.CommandTest.BaseCommandTest3();
             });
 
-            $.CommandTest.BaseCommandTest3();
         },
         BaseCommandTest3: function () {
             testNesne.testMiktari++;
             let data = "";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-
                 if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 3 başarısız");
+                $.CommandTest.BaseCommandTest4();
             });
-            $.CommandTest.BaseCommandTest4();
+
         },
         BaseCommandTest4: function () {
             testNesne.testMiktari++;
@@ -87,8 +88,9 @@ $(function name() {
 
                 if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 4 başarısız");
+                $.CommandTest.MongoDbCommandTest1();
             });
-            $.CommandTest.MongoDbCommandTest1();
+
         },
 
 
@@ -96,78 +98,79 @@ $(function name() {
             testNesne.testMiktari++;
             let data = "BaseCommand=MongoDbCommand&Command=";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "BaseCommandHatasi")
+                if (sonuc != "MongoDCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 1 başarısız");
+                $.CommandTest.MongoDbCommandTest2();
             });
-            $.CommandTest.MongoDbCommandTest2();
-        }
-        ,
+
+        },
         MongoDbCommandTest2: function () {
             testNesne.testMiktari++;
-            let data = "BaseCommand=MongoDbCommand&Command=??";
+            let data = "BaseCommand=MongoDbCommand&Command=ari";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "BaseCommandHatasi")
+                if (sonuc != "MongoDCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 2 başarısız");
+                $.CommandTest.MongoDbCommandTest3();
             });
-            $.CommandTest.MongoDbCommandTest3();
-        }
-        ,
+
+        },
         MongoDbCommandTest3: function () {
             testNesne.testMiktari++;
             let data = "BaseCommand=MongoDbCommand";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "BaseCommandHatasi")
+                if (sonuc != "MongoDCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 3 başarısız");
+                $.CommandTest.MongoDbCommandTest4();
             });
-            $.CommandTest.MongoDbCommandTest4();
-        }
-        ,
+
+        },
         MongoDbCommandTest4: function () {
             testNesne.testMiktari++;
             let data = "BaseCommand=MongoDbCommand&Komutum=kayit";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "BaseCommandHatasi")
+                if (sonuc != "MongoDCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 4 başarısız");
+                $.CommandTest.MySqlCommandTest1();
             });
-            $.CommandTest.MySqlCommandTest1();
+
         },
 
 
         MySqlCommandTest1: function () {
             testNesne.testMiktari++;
-            let data = "BaseCommand=MongoDbCommand&Command=";
+            let data = "BaseCommand=MysqlCommand&Command=";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "BaseCommandHatasi")
+                if (sonuc != "MySqlCommandHatasi")
                     testNesne.basarisizTestler.push("MySql Command Test 1 başarısız");
+                $.CommandTest.MySqlCommandTest2();
             });
-            $.CommandTest.MySqlCommandTest2();
-        }
-        ,
+
+        },
         MySqlCommandTest2: function () {
             testNesne.testMiktari++;
-            let data = "BaseCommand=MongoDbCommand&Command=??";
+            let data = "BaseCommand=MysqlCommand&Command=ari";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "BaseCommandHatasi")
+                if (sonuc != "MySqlCommandHatasi")
                     testNesne.basarisizTestler.push("MySql Command Test 2 başarısız");
+                $.CommandTest.MySqlCommandTest3();
             });
-            $.CommandTest.MySqlCommandTest3();
-        }
-        ,
+
+        },
         MySqlCommandTest3: function () {
             testNesne.testMiktari++;
-            let data = "BaseCommand=MongoDbCommand";
+            let data = "BaseCommand=MysqlCommand";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "BaseCommandHatasi")
+                if (sonuc != "MySqlCommandHatasi")
                     testNesne.basarisizTestler.push("MySql Command Test 3 başarısız");
+                $.CommandTest.MySqlCommandTest4();
             });
-            $.CommandTest.MySqlCommandTest4();
-        }
-        ,
+
+        },
         MySqlCommandTest4: function () {
             testNesne.testMiktari++;
-            let data = "BaseCommand=MongoDbCommand&Komutum=kayit";
+            let data = "BaseCommand=MysqlCommand&Komutum=kayit";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "BaseCommandHatasi")
+                if (sonuc != "MySqlCommandHatasi")
                     testNesne.basarisizTestler.push("MySql Command Test 4 başarısız");
             });
         }

@@ -32,10 +32,10 @@ class MongoDbCommand
             if (array_key_exists($_POST['Command'], $this->komutDizisi)) {
                 $this->komutDizisi[$_POST['Command']]->template();
             } else {
-                echo json_encode("MySqlCommandHatasi");
+                echo json_encode("MongoDbCommandHatasi");
             }
         } else {
-            echo json_encode("MySqlCommandHatasi");
+            echo json_encode("MongoDCommandHatasi");
         }
 
     }

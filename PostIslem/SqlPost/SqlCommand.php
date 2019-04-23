@@ -25,7 +25,12 @@ class MysqlCommand {
 
     public function execute() {
 
-        $this->komutDizisi[$_POST['Command']]->template();
+        if(array_key_exists ( $_POST['Command'] , $this->komutDizisi)){
+            $this->komutDizisi[$_POST['Command']]->template();
+        }
+        else{
+            echo json_encode("MySqlCommandHatasi");
+        }
     }
 
 }

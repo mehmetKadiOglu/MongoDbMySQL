@@ -1,6 +1,6 @@
 <?php
-    require_once("PostIslem/NoSqlPost/Command.php");
-    require_once("PostIslem/SqlPost/Command.php");
+    require_once("PostIslem/NoSqlPost/NoSqlCommand.php");
+    require_once("PostIslem/SqlPost/SqlCommand.php");
    
 
     class BaseCommand {
@@ -18,8 +18,13 @@
             $this->komutDizisi[$key] = $komutDizisi;
         }
     
-        public function command($key) {
-            $this->komutDizisi[$key]->execute();
+        public function command() {
+            if(array_key_exists ( $_POST['BaseCommand'] , $this->komutDizisi)){
+                $this->komutDizisi[$_POST['BaseCommand']]->execute();
+            }
+            else{
+                echo json_encode("BaseCommandHatasi");
+            } 
     
         }
     }

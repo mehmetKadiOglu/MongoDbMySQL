@@ -30,53 +30,145 @@ $(function name() {
     }
 
 
-    class Test{
+    class Test {
         constructor() {
 
             this.testMiktari = 0;
             this.basarisizTestler = [];
 
         }
-        
-        genelTest(){
-            $.GenelTestler.BaseCommandTest1();
+
+        genelTest() {
+            $.CommandTest.BaseCommandTest1();
         }
     }
 
 
 
-    $.GenelTestler = {
+    $.CommandTest = {
 
-        BaseCommandTest1:function () {
+        BaseCommandTest1: function () {
             testNesne.testMiktari++;
-            let data =  "BaseCommand=";
+            let data = "BaseCommand=";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                console.log(sonuc)
-                if(sonuc != "BaseCommandHatasi")
+
+                if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 1 başarısız");
-                    
+
             });
 
-            $.GenelTestler.BaseCommandTest2();
+            $.CommandTest.BaseCommandTest2();
         },
-        BaseCommandTest2:function () {
+        BaseCommandTest2: function () {
             testNesne.testMiktari++;
-            let data =  "BaseCommand=mongo";
+            let data = "BaseCommand=mongo";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                console.log(sonuc)
-                if(sonuc != "BaseCommandHatasi")
+
+                if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 2 başarısız");
             });
 
-            $.GenelTestler.BaseCommandTest3();
+            $.CommandTest.BaseCommandTest3();
         },
-        BaseCommandTest3:function () {
+        BaseCommandTest3: function () {
             testNesne.testMiktari++;
-            let data =  "";
+            let data = "";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                console.log(sonuc)
-                if(sonuc != "BaseCommandHatasi")
+
+                if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 3 başarısız");
+            });
+            $.CommandTest.BaseCommandTest4();
+        },
+        BaseCommandTest4: function () {
+            testNesne.testMiktari++;
+            let data = "Command=MongoDbCommand";
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+
+                if (sonuc != "BaseCommandHatasi")
+                    testNesne.basarisizTestler.push("Base Command Test 4 başarısız");
+            });
+            $.CommandTest.MongoDbCommandTest1();
+        },
+
+
+        MongoDbCommandTest1: function () {
+            testNesne.testMiktari++;
+            let data = "BaseCommand=MongoDbCommand&Command=";
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (sonuc != "BaseCommandHatasi")
+                    testNesne.basarisizTestler.push("MongoDb Command Test 1 başarısız");
+            });
+            $.CommandTest.MongoDbCommandTest2();
+        }
+        ,
+        MongoDbCommandTest2: function () {
+            testNesne.testMiktari++;
+            let data = "BaseCommand=MongoDbCommand&Command=??";
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (sonuc != "BaseCommandHatasi")
+                    testNesne.basarisizTestler.push("MongoDb Command Test 2 başarısız");
+            });
+            $.CommandTest.MongoDbCommandTest3();
+        }
+        ,
+        MongoDbCommandTest3: function () {
+            testNesne.testMiktari++;
+            let data = "BaseCommand=MongoDbCommand";
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (sonuc != "BaseCommandHatasi")
+                    testNesne.basarisizTestler.push("MongoDb Command Test 3 başarısız");
+            });
+            $.CommandTest.MongoDbCommandTest4();
+        }
+        ,
+        MongoDbCommandTest4: function () {
+            testNesne.testMiktari++;
+            let data = "BaseCommand=MongoDbCommand&Komutum=kayit";
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (sonuc != "BaseCommandHatasi")
+                    testNesne.basarisizTestler.push("MongoDb Command Test 4 başarısız");
+            });
+            $.CommandTest.MySqlCommandTest1();
+        },
+
+
+        MySqlCommandTest1: function () {
+            testNesne.testMiktari++;
+            let data = "BaseCommand=MongoDbCommand&Command=";
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (sonuc != "BaseCommandHatasi")
+                    testNesne.basarisizTestler.push("MySql Command Test 1 başarısız");
+            });
+            $.CommandTest.MySqlCommandTest2();
+        }
+        ,
+        MySqlCommandTest2: function () {
+            testNesne.testMiktari++;
+            let data = "BaseCommand=MongoDbCommand&Command=??";
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (sonuc != "BaseCommandHatasi")
+                    testNesne.basarisizTestler.push("MySql Command Test 2 başarısız");
+            });
+            $.CommandTest.MySqlCommandTest3();
+        }
+        ,
+        MySqlCommandTest3: function () {
+            testNesne.testMiktari++;
+            let data = "BaseCommand=MongoDbCommand";
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (sonuc != "BaseCommandHatasi")
+                    testNesne.basarisizTestler.push("MySql Command Test 3 başarısız");
+            });
+            $.CommandTest.MySqlCommandTest4();
+        }
+        ,
+        MySqlCommandTest4: function () {
+            testNesne.testMiktari++;
+            let data = "BaseCommand=MongoDbCommand&Komutum=kayit";
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (sonuc != "BaseCommandHatasi")
+                    testNesne.basarisizTestler.push("MySql Command Test 4 başarısız");
             });
         }
     }
@@ -89,4 +181,6 @@ $(function name() {
 
     let testNesne = new Test();
     testNesne.genelTest();
+    console.log(testNesne.testMiktari);
+    console.log(testNesne.basarisizTestler.length);
 });

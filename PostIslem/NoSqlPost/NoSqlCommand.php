@@ -1,14 +1,16 @@
 <?php
-require_once("MongoDbPost_Islem.php");
+require_once "MongoDbPost_Islem.php";
 
-class MongoDbCommand {
-    
+class MongoDbCommand
+{
+
     private $komutDizisi;
 
-    function __construct() {
+    public function __construct()
+    {
 
         $this->setKomutDizisi("kayitYap", new MongoDbKayitYap());
-        $this->setKomutDizisi("girisYap", new MongoDbGiris());  
+        $this->setKomutDizisi("girisYap", new MongoDbGiris());
         $this->setKomutDizisi("konulariGetir", new MongoDbKonulariGetir());
         $this->setKomutDizisi("yorumlariGetir", new MongoDbYorumlariGetir());
         $this->setKomutDizisi("konuAc", new MongoDbKonuAc());
@@ -18,21 +20,23 @@ class MongoDbCommand {
 
     }
 
-    private function setKomutDizisi($key, $komutDizisi) {
+    private function setKomutDizisi($key, $komutDizisi)
+    {
         $this->komutDizisi[$key] = $komutDizisi;
     }
 
-    public function execute() {
+    public function execute()
+    {
 
-        if(array_key_exists ( $_POST['Command'] , $this->komutDizisi)){
-            $this->komutDizisi[$_POST['Command']]->template();
-        }
-        else{
-            echo json_encode("MongoDbCommandHatasi");
+        if (isset($_POST['Command'])) {
+            if (array_key_exists($_POST['Command'], $this->komutDizisi)) {
+                $this->komutDizisi[$_POST['Command']]->template();
+            } else {
+                echo json_encode("MySqlCommandHatasi");
+            }
+        } else {
+            echo json_encode("MySqlCommandHatasi");
         }
 
     }
 }
-
-
-?>

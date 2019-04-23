@@ -1,0 +1,504 @@
+body{
+
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    background-color: #15151d;
+    
+}
+
+/*  */
+    .bolum-boy { /* contentleri barındarıdan section tagı */
+        width: 100%;
+        height: 80%;
+    }
+
+    .container-boyut {
+
+        height: 100vh;
+        width: 100%;
+    }
+    .container-gorsel {
+
+        background-color: #15151d;
+    }
+
+/* */
+
+/*  Header Kısmı  */
+
+    .header-boyut {
+
+        height: 20%;
+        width: 100%;
+    }
+    .header-gorsel {
+
+        background-color: #15151d;
+    }
+    .header-hizalama {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+        .headerBaslik-boyut {
+
+            height: 50%;
+            width: 60%;
+        }
+        .headerBaslik-gorsel {
+
+            background-color: #DB1B02;
+            border-radius: 15px;
+            font-size: 1.8em;
+        }
+        .headerBaslik-hizalama {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+/* Header Bitiş*/
+
+/* 1. section // giris - kullanici kayit - konular başlangıc */
+    /*  Konu ve Giris kısımları  */
+        .konu_GirisContent-boyut {
+
+            height: 80%;
+            width: 100%;
+        }
+        .konu_GirisContent-gorsel {
+
+            background-color: #15151d;
+        }
+        .konu_GirisContent-hizalama {
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Konular Başlangıç  */
+            .konular-boyut {
+                overflow-y: scroll;
+                height: 90%;
+                width: 60%;
+            }
+            .konular-gorsel {
+                
+                background-color: #DB1B02;
+                border-radius: 15px;
+
+            }
+            .konular-hizalama {
+
+                padding-top: 0.3%;
+            }
+
+                /* Konular text kutusu, konuların basıldığı div. İçersinde 2 div var.
+                1) Metnin ayrıntılarının olduğu div -  konuTextSpan (divin içersinde spanlar mevcut)
+                2) Metnin olduğu div - konuText    */
+                .konularTextKutu-boyut {
+
+                    height: 30%;
+                    width: 90%;
+                }
+                .konularTextKutu-hizalama {
+
+                    padding-left: 1%;
+                    margin-left: 5%;
+                    margin-top: 0.5%;
+                }
+                .konularTextKutu-gorsel {
+
+                    border-radius: 25px;
+                    background-color: #15151d;
+                }
+
+                    .konuTextSpan-hizalama {
+                        
+                        display: inline-block;
+
+                    }
+                    .konuTextSpan-hizalama:nth-child(odd) {
+
+                        width: 60px;
+                        text-align: center;
+                    }
+                    .konuTextSpan-hizalama:nth-child(even) {
+                        
+                        width: 160px;
+                    }
+        
+
+                .konuText-boyut {
+                    width: 98%;
+                    height: 66%;
+                    overflow-y: scroll;
+                }
+                .konuText-gorsel {
+
+                    border-radius: 25px;
+                    background-color: #DB1B02;
+
+                }
+                .konuText-hizalama {
+
+                    margin-top: 1%;
+                    padding-left: 1%;
+                    padding-top: 1%;
+                }
+        /* Konular Bitiş  */
+
+
+        /* Giris Başlangıc */
+
+            .giris-boyut {
+
+                height: 70%;
+                width: 30%;
+            }
+            .giris-gorsel {
+
+                border-radius: 15px;
+                border: 2px solid #DB1B02;
+            }
+            .giris-hizalama {
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            
+                .girisInput-gorsel {
+
+                    color: white!important;
+                    background-color: #15151d;
+                    border-radius: 25px;
+                    text-align: center;
+                }
+                .girisInput-boyut {
+
+                    width: 190px;
+                    height: 30px;
+                }
+                .girisInput-boyut:focus {
+
+                    outline: none;
+                }
+
+
+                .girisButton-gorsel {
+
+                    background-color: #DB1B02;
+                    border-radius: 25px;
+                    text-align: center;
+                    border: none;
+                    color: white;
+                } 
+                .girisButton-boyut {
+
+                    width: 100px;
+                    height: 60px;
+                }
+                .girisButton-boyut:focus {
+
+                    outline: none;
+                }
+                .girisButton-boyut:hover {
+                    
+                    cursor: pointer;
+                }
+
+        /* Giris Bitis */    
+
+    /*  Konu ve Giris kısımları bitis  */
+
+
+    /*footer giris*/
+        .konuFooter-boyut {
+
+            height: 20%;
+            width: 100%;
+        }
+        .konuFooter-gorsel {
+
+            background-color: #15151d;
+        }
+        .konuFooter-hizalama {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .konuFooter_Ic-boyut {
+
+                height: 80%;
+                width: 60%;
+            }
+            .konuFooter_Ic-gorsel {
+
+                background-color: #DB1B02;
+                border-radius: 15px;
+            }
+            .konuFooter_Ic-hizalama {
+                position: relative;
+            }
+
+                /* konu girme kısmı başlangıc*/
+                .konuForm-hizalama {
+                    margin-left:7%;
+                    margin-top:5px;
+                }
+                /* konu girme kısmı bitiş*/
+
+
+                /*kullanici kayit kısmı başlangıc*/
+
+                .kayitForm-hizalama {
+                    margin-left:7%;
+                    margin-top:2%;
+                }
+
+
+                    .kayitFormInput-hizalama {
+                        margin-left: 3%;
+                        margin-right: 2%;
+                    }
+
+                    .kayitFormText-boyut {
+                        width: 130px;
+                    }
+                    .kayitFormText-hizalama {
+                        display: inline-block;
+                    }
+
+
+                    .kayitFormAltDiv-hizalama {
+                        margin-top: 2%;
+                    }
+
+                    .kayitButton-hizalama {
+                        position: absolute; 
+                        right: 35px;
+                        top: 35px;   
+                    }
+                    .kayitButton-gorsel {
+                        border-radius: 15px;
+                        font-size: 1.2em
+                    }
+
+                /*kullanici kayit kısmı bitiş*/
+
+    /* footer bitiş */
+
+/* 1. section // giris - kullanici kayit - konular bitiş */
+
+
+/* 2. section // konulara gelen yorumlar başlangıc */
+
+    /* yorum kısmı başlangıc*/
+
+        .yorumContent-boyut {
+
+            height: 95%;
+            width: 100%;
+        }
+        .yorumContent-gorsel {
+
+            background-color: #15151d;
+        }
+        .yorumContent-hizalama {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .yorumGenelDiv-boyut {
+                
+                height: 94%;
+                width: 60%;
+            }
+            .yorumGenelDiv-gorsel {
+
+                background-color: #DB1B02;
+                border-radius: 15px;
+            }
+            .yorumGenelDiv-hizalama {
+
+                padding-top: 0.3%;
+            }
+
+                .yorumKonu-boyut {
+
+                    width: 100%;
+                    height: 31.5%;
+                    background-color: rgb(144, 54, 121)
+                }
+
+
+
+                .yorumKutusu-boyut {
+
+                    height: 68%;
+                    width: 88%;
+                    overflow-y: scroll;
+                }
+                .yorumKutusu-hizalama {
+                    margin-left: 7%;
+                    margin-top: 0.5%;
+                }   
+
+                    .yorum-boyut {
+
+                        height: 33%;
+                        width: 100%;
+
+                    }
+                    .yorum-gorsel {
+                        border-radius: 25px;
+                        background-color: #15151d;
+                    }
+                    .yorum-hizalama{
+
+                        margin-top: 0.8%;
+                    }
+
+                        .yorumTextSpan-hizalama {
+                                
+                            display: inline-block;
+
+                        }
+                        .yorumTextSpan-hizalama:nth-child(odd) {
+                            margin-left: 3%;
+                            width: 80px;
+                            text-align: center;
+                        }
+                        .yorumTextSpan-hizalama:nth-child(even) {
+                            
+                            width: 190px;
+                        }
+
+                        .yorumText-boyut {
+                            width: 98%;
+                            height: 66%;
+                            overflow-y: scroll;
+                        }
+                        .yorumText-gorsel {
+        
+                            border-radius: 25px;
+                            background-color: #DB1B02;
+        
+                        }
+                        .yorumText-hizalama {
+                            
+                            margin-left: 0.5%;
+                            margin-top: 1%;
+                            padding-left: 1%;
+                            padding-top: 1%;
+                        }    
+
+
+    /* yorum kısmı bitiş*/
+
+
+
+    /* footer kısmı başlangıc */
+
+        .yorumFooter-boyut {
+
+            height: 30%;
+            width: 100%;
+
+        }
+        .yorumFooter-gorsel {
+
+            background-color: #15151d;
+
+        }
+        .yorumFooter-hizalama {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+
+            .yorumFooter_ic-boyut {
+                height: 94%;
+                width: 60%;
+            }
+            .yorumFooter_ic-gorsel {
+
+                background-color: #DB1B02;
+                border-radius: 15px;
+
+            }
+            .yorumFooter_ic-hizalama {
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+
+            }
+
+                .geriGelButton-gorsel {
+
+                    background-color: #15151d;
+                    border-radius: 25px;
+                    text-align: center;
+                    border: none;
+                    color: white;
+                } 
+                .geriGelButton-boyut {
+
+                    width: 150px;
+                    height: 25%;
+                }
+                .geriGelButton-boyut:focus {
+
+                    outline: none;
+                }
+                .geriGelButton-boyut:hover {
+                    
+                    cursor: pointer;
+                }
+    /* footer kısmı bitiş */
+
+
+/* 2. section // konulara gelen yorumlar bitiş */
+
+
+/*  Ekler */
+    ::-webkit-scrollbar {
+
+        width: 20px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+
+        border-radius: 10px;
+        background-color: #DB1B02;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+
+        background-color: #15151d; 
+        border-radius: 10px;
+        border: 1px solid #DB1B02; 
+    }
+    .sakla {
+
+        display: none;
+    }
+/* Ekler Bitis */

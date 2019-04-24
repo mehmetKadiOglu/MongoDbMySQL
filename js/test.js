@@ -172,10 +172,23 @@ $(function name() {
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (sonuc != "MySqlCommandHatasi")
                     testNesne.basarisizTestler.push("MySql Command Test 4 başarısız");
+                $.MongoDbTest.MongoDbKullaniciKayit1();
             });
         }
     }
     $.MongoDbTest = {
+
+        MongoDbKullaniciKayit1: function () {
+            console.log("hirrim");
+            // let data = "kullaniciAd=" + ad + "&kullaniciSoyAd=" + soyad + "&mail=" + mail + "&sifre=" + sifre + "&Command=kayitYap&BaseCommand=MongoDbCommand";
+            let data = 'kullaniciAd=&kullaniciSoyAd=&mail=&sifre=&Command=kayitYap&BaseCommand=MongoDbCommand'
+            $.PhpIslem.AjaxIslem2(data);
+            /* $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                     testNesne.basarisizTestler.push("MySql Command Test 1 başarısız");
+                 console.log(sonuc + "kayitttttttt")
+             });*/
+        }
 
     }
     $.MySqlTest = {

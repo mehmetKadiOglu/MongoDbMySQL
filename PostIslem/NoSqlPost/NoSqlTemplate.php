@@ -76,7 +76,7 @@ abstract class MongoDbKayitYapTemplate extends KullaniciCollection
                 $kontrol[0] = true;
                 $kontrol["Post_Hatasi"] = "Post Eksikliği";
                 break;
-            } else if (!(strlen($_POST[$key_Array[$i]]) >= 6)) {
+            } else if (!(strlen($_POST[$key_Array[$i]]) >= 2)) {
                 $kontrol[0] = true;
                 $kontrol["Post_Hatasi"] = "Post İçerik Eksikliği";
                 break;
@@ -97,7 +97,7 @@ abstract class MongoDbKayitYapTemplate extends KullaniciCollection
     }
     protected function veritabaniIslem($data)
     {
-        if ( !(is_array($data))) {
+        if (!(is_array($data))) {
             $this->setSonucDiziEleman("Post_Hatasi", $data);
             $this->setSonucDiziAjaxEleman("Post_Hatasi", $data);
         } else {

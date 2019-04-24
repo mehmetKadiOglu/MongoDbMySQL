@@ -41,6 +41,11 @@ $(function name() {
         genelTest() {
             $.CommandTest.BaseCommandTest1();
         }
+
+        yazdir() {
+            console.log(testNesne.testMiktari);
+            console.log(testNesne.basarisizTestler.length);
+        }
     }
 
 
@@ -98,7 +103,7 @@ $(function name() {
             testNesne.testMiktari++;
             let data = "BaseCommand=MongoDbCommand&Command=";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MongoDCommandHatasi")
+                if (sonuc != "MongoDbCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 1 başarısız");
                 $.CommandTest.MongoDbCommandTest2();
             });
@@ -108,7 +113,7 @@ $(function name() {
             testNesne.testMiktari++;
             let data = "BaseCommand=MongoDbCommand&Command=ari";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MongoDCommandHatasi")
+                if (sonuc != "MongoDbCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 2 başarısız");
                 $.CommandTest.MongoDbCommandTest3();
             });
@@ -179,16 +184,33 @@ $(function name() {
     $.MongoDbTest = {
 
         MongoDbKullaniciKayit1: function () {
-            console.log("hirrim");
-            // let data = "kullaniciAd=" + ad + "&kullaniciSoyAd=" + soyad + "&mail=" + mail + "&sifre=" + sifre + "&Command=kayitYap&BaseCommand=MongoDbCommand";
+            testNesne.testMiktari++;
             let data = 'kullaniciAd=&kullaniciSoyAd=&mail=&sifre=&Command=kayitYap&BaseCommand=MongoDbCommand'
-            $.PhpIslem.AjaxIslem2(data);
-            /* $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                     testNesne.basarisizTestler.push("MySql Command Test 1 başarısız");
-                 console.log(sonuc + "kayitttttttt")
-             });*/
-        }
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Kullanici Kayit Test 1 başarısız");
+                $.MongoDbTest.MongoDbKullaniciKayit2()
+            });
+        },
+        MongoDbKullaniciKayit2: function () {
+            testNesne.testMiktari++;
+            let data = 'kullaniciAd=aaa&kullaniciSoyAd=bbb&mail=ccc&Command=kayitYap&BaseCommand=MongoDbCommand'
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Kullanici Kayit Test 2 başarısız");
+                $.MongoDbTest.MongoDbKullaniciKayit3();
+            });
+        },
+        MongoDbKullaniciKayit3: function () {
+            testNesne.testMiktari++;
+            let data = 'kullaniciAd=aaa&kullaniciSoyAd=bbb&mail=ccc&sifre=&Command=kayitYap&BaseCommand=MongoDbCommand'
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Kullanici Kayit Test 3 başarısız");
+                testNesne.yazdir();
+            });
+        },
+
 
     }
     $.MySqlTest = {
@@ -197,6 +219,5 @@ $(function name() {
 
     let testNesne = new Test();
     testNesne.genelTest();
-    console.log(testNesne.testMiktari);
-    console.log(testNesne.basarisizTestler.length);
+
 });

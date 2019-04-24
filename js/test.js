@@ -44,7 +44,7 @@ $(function name() {
 
         yazdir() {
             console.log(testNesne.testMiktari);
-            console.log(testNesne.basarisizTestler.length);
+            console.log(testNesne.basarisizTestler);
         }
     }
 
@@ -207,9 +207,57 @@ $(function name() {
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push("MongoDb Kullanici Kayit Test 3 başarısız");
-                testNesne.yazdir();
+                $.MongoDbTest.MongoDbKullaniciKayit4();
             });
         },
+        MongoDbKullaniciKayit4: function () {
+            testNesne.testMiktari++;
+            let data = 'kullaniciAd=Test&kullaniciSoyAd=test&mail=test@test&sifre=test&Command=kayitYap&BaseCommand=MongoDbCommand'
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if ((sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Kullanici Kayit Test 4 başarısız");
+                $.MongoDbTest.MongoDbKullaniciGiris1();
+            });
+        },
+
+
+        MongoDbKullaniciGiris1: function () {
+            testNesne.testMiktari++;
+            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=girisYap&BaseCommand=MongoDbCommand'
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 1 başarısız");
+                $.MongoDbTest.MongoDbKullaniciGiris2();
+
+            });
+        },
+        MongoDbKullaniciGiris2: function () {
+            testNesne.testMiktari++;
+            let data = 'mail=&sifre=&Command=girisYap&BaseCommand=MongoDbCommand'
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 2 başarısız");
+                $.MongoDbTest.MongoDbKullaniciGiris3();
+            });
+        },
+        MongoDbKullaniciGiris3: function () {
+            testNesne.testMiktari++;
+            let data = 'mail=&sifre=test&Command=girisYap&BaseCommand=MongoDbCommand'
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 3 başarısız");
+                $.MongoDbTest.MongoDbKullaniciGiris4();
+            });
+        },
+        MongoDbKullaniciGiris4: function () {
+            testNesne.testMiktari++;
+            let data = 'mail=test@test&sifre=test&Command=girisYap&BaseCommand=MongoDbCommand'
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if ((sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 4 başarısız");
+                testNesne.yazdir();
+            });
+        }
 
 
     }

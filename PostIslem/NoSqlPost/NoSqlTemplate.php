@@ -20,6 +20,23 @@ abstract class NoSqlTemplate extends BaseTemplate
     abstract protected function veritabaniIslem($data);
     abstract protected function collectionSec();
 
+    protected function post_Kontrol($key_Array)
+    {
+        $kontrol[] = false;
+        for ($i = 0; $i < count($key_Array); $i++) {
+            if (!(isset($_POST[$key_Array[$i]]))) {
+                $kontrol[0] = true;
+                $kontrol["Post_Hatasi"] = "Post Eksikliği";
+                break;
+            } else if (!(strlen($_POST[$key_Array[$i]]) >= 2)) {
+                $kontrol[0] = true;
+                $kontrol["Post_Hatasi"] = "Post İçerik Eksikliği";
+                break;
+            }
+        }
+        return $kontrol;
+    }
+
     public function template()
     {
 
@@ -46,20 +63,34 @@ abstract class KullaniciCollection extends NoSqlTemplate
 abstract class MongoDbGirisTemplate extends KullaniciCollection
 {
 
+    private function keyArrayHazirla()
+    {
+        $key_Array = [0 => "mail", 1 => "sifre"];
+        return $key_Array;
+    }
     protected function veritabaniSorguData()
     {
 
-        $array[0] = array("mail" => $_POST['mail'], "sifre" => md5($_POST['sifre']));
-        $array[1] = array();
-        return $array;
+        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
+        if ($kontrolArray[0]) {
+            return $kontrolArray["Post_Hatasi"];
+        } else {
+            $array[0] = array("mail" => $_POST['mail'], "sifre" => md5($_POST['sifre']));
+            $array[1] = array();
+            return $array;
+        }
 
     }
 
     protected function veritabaniIslem($data)
     {
-
-        $this->setSonucDiziEleman("data", $this->getDb()->getData($data[0], $data[1]));
-        $this->setSonucDiziEleman("dataSayi", $this->getDb()->getDataUzunlugu());
+        if (!(is_array($data))) {
+            $this->setSonucDiziEleman("Post_Hatasi", $data);
+            $this->setSonucDiziAjaxEleman("Post_Hatasi", $data);
+        } else {
+            $this->setSonucDiziEleman("data", $this->getDb()->getData($data[0], $data[1]));
+            $this->setSonucDiziEleman("dataSayi", $this->getDb()->getDataUzunlugu());
+        }
 
     }
 }
@@ -67,26 +98,14 @@ abstract class MongoDbGirisTemplate extends KullaniciCollection
 abstract class MongoDbKayitYapTemplate extends KullaniciCollection
 {
 
-    private function post_Kontrol()
+    private function keyArrayHazirla()
     {
         $key_Array = [0 => "mail", 1 => "sifre", 2 => "kullaniciAd", 3 => "kullaniciSoyAd"];
-        $kontrol[] = false;
-        for ($i = 0; $i < count($key_Array); $i++) {
-            if (!(isset($_POST[$key_Array[$i]]))) {
-                $kontrol[0] = true;
-                $kontrol["Post_Hatasi"] = "Post Eksikliği";
-                break;
-            } else if (!(strlen($_POST[$key_Array[$i]]) >= 2)) {
-                $kontrol[0] = true;
-                $kontrol["Post_Hatasi"] = "Post İçerik Eksikliği";
-                break;
-            }
-        }
-        return $kontrol;
+        return $key_Array;
     }
     protected function veritabaniSorguData()
     {
-        $kontrolArray = $this->post_Kontrol();
+        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
         if ($kontrolArray[0]) {
             return $kontrolArray["Post_Hatasi"];
         } else {

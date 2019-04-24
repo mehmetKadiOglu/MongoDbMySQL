@@ -56,6 +56,7 @@ $(function name() {
             //$.PhpIslem.AjaxIslem2(data);
             $.PhpIslem.AjaxIslem(this.ajaxPostDataHazirla()).then(function (sonuc) {
 
+                console.log(sonuc);
                 if (sonuc["Hata"])
                     alert(sonuc["Hata"]);
                 else
@@ -587,7 +588,7 @@ $(function name() {
 
 
     $("#konular").on("click", "[class='konularTextKutu-boyut konularTextKutu-hizalama konularTextKutu-gorsel']", function () {
-        
+
         $.Yonlendirici.YorumKonuSayfasiGecis("#girisKonuBolum", "#yorumBolum");
         $.Yonlendirici.YorumlarKonuYaz($.SayfaIslem.AttrValue(this, "konuKey"), $(this).html());
 

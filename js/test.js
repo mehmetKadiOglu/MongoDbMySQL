@@ -33,8 +33,12 @@ $(function name() {
     class Test {
         constructor() {
 
+            this.testArrayIndex = 0;
             this.testMiktari = 0;
             this.basarisizTestler = [];
+            this.testArray = [];
+            this.testArray.push("MongoDbCommand");
+            this.testArray.push("MysqlCommand");
             this.konuAnahtar = "";
             this.yorumAnahtar = "";
 
@@ -179,265 +183,271 @@ $(function name() {
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (sonuc != "MySqlCommandHatasi")
                     testNesne.basarisizTestler.push("MySql Command Test 4 başarısız");
-                $.MongoDbTest.MongoDbKullaniciKayit1();
+                else {
+                    $.DatabasePostTest.DatabaseKullaniciKayit1();
+                }
+
             });
         }
     }
-    $.MongoDbTest = {
+    $.DatabasePostTest = {
 
-        MongoDbKullaniciKayit1: function () {
+        DatabaseKullaniciKayit1: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=&kullaniciSoyAd=&mail=&sifre=&Command=kayitYap&BaseCommand=MongoDbCommand'
+            let data = 'kullaniciAd=&kullaniciSoyAd=&mail=&sifre=&Command=kayitYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Kullanici Kayit Test 1 başarısız");
-                $.MongoDbTest.MongoDbKullaniciKayit2()
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Kayit Test 1 başarısız");
+                $.DatabasePostTest.DatabaseKullaniciKayit2()
             });
         },
-        MongoDbKullaniciKayit2: function () {
+        DatabaseKullaniciKayit2: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=aaa&kullaniciSoyAd=bbb&mail=ccc&Command=kayitYap&BaseCommand=MongoDbCommand'
+            let data = 'kullaniciAd=aaa&kullaniciSoyAd=bbb&mail=ccc&Command=kayitYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Kullanici Kayit Test 2 başarısız");
-                $.MongoDbTest.MongoDbKullaniciKayit3();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Kayit Test 2 başarısız");
+                $.DatabasePostTest.DatabaseKullaniciKayit3();
             });
         },
-        MongoDbKullaniciKayit3: function () {
+        DatabaseKullaniciKayit3: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=aaa&kullaniciSoyAd=bbb&mail=ccc&sifre=&Command=kayitYap&BaseCommand=MongoDbCommand'
+            let data = 'kullaniciAd=aaa&kullaniciSoyAd=bbb&mail=ccc&sifre=&Command=kayitYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Kullanici Kayit Test 3 başarısız");
-                $.MongoDbTest.MongoDbKullaniciKayit4();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Kayit Test 3 başarısız");
+                $.DatabasePostTest.DatabaseKullaniciKayit4();
             });
         },
-        MongoDbKullaniciKayit4: function () {
+        DatabaseKullaniciKayit4: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=Test&kullaniciSoyAd=test&mail=test@test&sifre=test&Command=kayitYap&BaseCommand=MongoDbCommand'
+            let data = 'kullaniciAd=Test&kullaniciSoyAd=test&mail=test@test&sifre=test&Command=kayitYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Kullanici Kayit Test 4 başarısız");
-                $.MongoDbTest.MongoDbKullaniciGiris1();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Kayit Test 4 başarısız");
+                $.DatabasePostTest.DatabaseKullaniciGiris1();
             });
         },
 
 
-        MongoDbKullaniciGiris1: function () {
+        DatabaseKullaniciGiris1: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=girisYap&BaseCommand=MongoDbCommand'
+            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=girisYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 1 başarısız");
-                $.MongoDbTest.MongoDbKullaniciGiris2();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Giris Test 1 başarısız");
+                $.DatabasePostTest.DatabaseKullaniciGiris2();
 
             });
         },
-        MongoDbKullaniciGiris2: function () {
+        DatabaseKullaniciGiris2: function () {
             testNesne.testMiktari++;
-            let data = 'mail=&sifre=&Command=girisYap&BaseCommand=MongoDbCommand';
+            let data = 'mail=&sifre=&Command=girisYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 2 başarısız");
-                $.MongoDbTest.MongoDbKullaniciGiris3();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Giris Test 2 başarısız");
+                $.DatabasePostTest.DatabaseKullaniciGiris3();
             });
         },
-        MongoDbKullaniciGiris3: function () {
+        DatabaseKullaniciGiris3: function () {
             testNesne.testMiktari++;
-            let data = 'mail=&sifre=test&Command=girisYap&BaseCommand=MongoDbCommand';
+            let data = 'mail=&sifre=test&Command=girisYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 3 başarısız");
-                $.MongoDbTest.MongoDbKullaniciGiris4();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Giris Test 3 başarısız");
+                $.DatabasePostTest.DatabaseKullaniciGiris4();
             });
         },
-        MongoDbKullaniciGiris4: function () {
+        DatabaseKullaniciGiris4: function () {
             testNesne.testMiktari++;
-            let data = 'mail=test@test&sifre=test&Command=girisYap&BaseCommand=MongoDbCommand';
+            let data = 'mail=test@test&sifre=test&Command=girisYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 4 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Giris Test 4 başarısız");
 
-                $.MongoDbTest.MongoDbKonuKayit1();
+                $.DatabasePostTest.DatabaseKonuKayit1();
             });
         },
 
 
 
 
-        MongoDbKonuKayit1: function () {
+        DatabaseKonuKayit1: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=konuAc&BaseCommand=MongoDbCommand';
+            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 1 başarısız");
-                $.MongoDbTest.MongoDbKonuKayit2();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 1 başarısız");
+                $.DatabasePostTest.DatabaseKonuKayit2();
 
             });
         },
-        MongoDbKonuKayit2: function () {
+        DatabaseKonuKayit2: function () {
             testNesne.testMiktari++;
-            let data = 'konu=&yazilanMetin=&Command=konuAc&BaseCommand=MongoDbCommand';
+            let data = 'konu=&yazilanMetin=&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 2 başarısız");
-                $.MongoDbTest.MongoDbKonuKayit3();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 2 başarısız");
+                $.DatabasePostTest.DatabaseKonuKayit3();
             });
         },
-        MongoDbKonuKayit3: function () {
+        DatabaseKonuKayit3: function () {
             testNesne.testMiktari++;
-            let data = 'konu=&yazilanMetin=jhjhj&Command=konuAc&BaseCommand=MongoDbCommand';
+            let data = 'konu=&yazilanMetin=jhjhj&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 3 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 3 başarısız");
                 else
-                    $.MongoDbTest.MongoDbKonuKayit4();
+                    $.DatabasePostTest.DatabaseKonuKayit4();
             });
         },
-        MongoDbKonuKayit4: function () {
+        DatabaseKonuKayit4: function () {
             testNesne.testMiktari++;
-            let data = 'konu=deneme12&yazilanMetin=deneme12&Command=konuAc&BaseCommand=MongoDbCommand';
+            let data = 'konu=deneme12&yazilanMetin=deneme12&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 4 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 4 başarısız");
                 else {
                     testNesne.konuAnahtar = sonuc["anahtar"];
-                    $.MongoDbTest.MongoDbYorumKayit1();
+                    $.DatabasePostTest.DatabaseYorumKayit1();
                 }
             });
         },
 
 
 
-        MongoDbYorumKayit1: function () {
+        DatabaseYorumKayit1: function () {
 
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=yorumYap&BaseCommand=MongoDbCommand';
+            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 1 başarısız");
-                $.MongoDbTest.MongoDbYorumKayit2();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 1 başarısız");
+                $.DatabasePostTest.DatabaseYorumKayit2();
 
             });
         },
-        MongoDbYorumKayit2: function () {
+        DatabaseYorumKayit2: function () {
             testNesne.testMiktari++;
-            let data = 'yazilanMetin=&parentKey=&Command=yorumYap&BaseCommand=MongoDbCommand';
+            let data = 'yazilanMetin=&parentKey=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 2 başarısız");
-                $.MongoDbTest.MongoDbYorumKayit3();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 2 başarısız");
+                $.DatabasePostTest.DatabaseYorumKayit3();
             });
         },
-        MongoDbYorumKayit3: function () {
+        DatabaseYorumKayit3: function () {
             testNesne.testMiktari++;
-            let data = 'yazilanMetin=sadsa&parentKey=&Command=yorumYap&BaseCommand=MongoDbCommand';
+            let data = 'yazilanMetin=sadsa&parentKey=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 3 başarısız");
-                $.MongoDbTest.MongoDbYorumKayit4();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 3 başarısız");
+                $.DatabasePostTest.DatabaseYorumKayit4();
             });
         },
-        MongoDbYorumKayit4: function () {
+        DatabaseYorumKayit4: function () {
             testNesne.testMiktari++;
-            let data = 'yazilanMetin=deneme123&parentKey=' + testNesne.konuAnahtar + '&Command=yorumYap&BaseCommand=MongoDbCommand';
+            let data = 'yazilanMetin=deneme123&parentKey=' + testNesne.konuAnahtar + '&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 4 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 4 başarısız");
                 else {
                     testNesne.yorumAnahtar = sonuc["anahtar"];
                 }
-                $.MongoDbTest.MongoDbYorumSil1();
+                $.DatabasePostTest.DatabaseYorumSil1();
             });
         },
 
 
 
 
-        MongoDbYorumSil1: function () {
+        DatabaseYorumSil1: function () {
 
             testNesne.testMiktari++;
-            let data = 'aa=&bb=&Command=yorumSil&BaseCommand=MongoDbCommand';
+            let data = 'aa=&bb=&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 1 başarısız");
-                $.MongoDbTest.MongoDbYorumSil2();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 1 başarısız");
+                $.DatabasePostTest.DatabaseYorumSil2();
 
             });
         },
-        MongoDbYorumSil2: function () {
+        DatabaseYorumSil2: function () {
             testNesne.testMiktari++;
-            let data = 'yorumKey=&parentKey=&Command=yorumSil&BaseCommand=MongoDbCommand';
+            let data = 'yorumKey=&parentKey=&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 2 başarısız");
-                $.MongoDbTest.MongoDbYorumSil3();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 2 başarısız");
+                $.DatabasePostTest.DatabaseYorumSil3();
             });
         },
-        MongoDbYorumSil3: function () {
+        DatabaseYorumSil3: function () {
             testNesne.testMiktari++;
-            let data = 'yorumKey=&parentKey=aaaa&Command=yorumSil&BaseCommand=MongoDbCommand';
+            let data = 'yorumKey=&parentKey=aaaa&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 3 başarısız");
-                $.MongoDbTest.MongoDbYorumSil4();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 3 başarısız");
+                $.DatabasePostTest.DatabaseYorumSil4();
             });
         },
-        MongoDbYorumSil4: function () {
+        DatabaseYorumSil4: function () {
             testNesne.testMiktari++;
-            let data = 'yorumKey=' + testNesne.yorumAnahtar + '&parentKey=' + testNesne.konuAnahtar + '&Command=yorumSil&BaseCommand=MongoDbCommand';
+            let data = 'yorumKey=' + testNesne.yorumAnahtar + '&parentKey=' + testNesne.konuAnahtar + '&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 4 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 4 başarısız");
                 else {
 
                 }
-                $.MongoDbTest.MongoDbKonuSil1();
+                $.DatabasePostTest.DatabaseKonuSil1();
             });
         },
 
 
 
 
-        MongoDbKonuSil1: function () {
+        DatabaseKonuSil1: function () {
 
             testNesne.testMiktari++;
-            let data = 'aa=&Command=konuSil&BaseCommand=MongoDbCommand';
+            let data = 'aa=&Command=konuSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 1 başarısız");
-                $.MongoDbTest.MongoDbKonuSil2();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 1 başarısız");
+                $.DatabasePostTest.DatabaseKonuSil2();
 
             });
         },
-        MongoDbKonuSil2: function () {
+        DatabaseKonuSil2: function () {
             testNesne.testMiktari++;
-            let data = 'konuKey=&Command=konuSil&BaseCommand=MongoDbCommand';
+            let data = 'konuKey=&Command=konuSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 2 başarısız");
-                $.MongoDbTest.MongoDbKonuSil3();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 2 başarısız");
+                $.DatabasePostTest.DatabaseKonuSil3();
             });
         },
-        MongoDbKonuSil3: function () {
+        DatabaseKonuSil3: function () {
             testNesne.testMiktari++;
-            let data = 'konuKey=a&Command=konuSil&BaseCommand=MongoDbCommand';
+            let data = 'konuKey=a&Command=konuSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 3 başarısız");
-                $.MongoDbTest.MongoDbKonuSil4();
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 3 başarısız");
+                $.DatabasePostTest.DatabaseKonuSil4();
             });
         },
-        MongoDbKonuSil4: function () {
+        DatabaseKonuSil4: function () {
             testNesne.testMiktari++;
-            let data = 'konuKey=' + testNesne.konuAnahtar + '&Command=konuSil&BaseCommand=MongoDbCommand';
+            let data = 'konuKey=' + testNesne.konuAnahtar + '&Command=konuSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 4 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 4 başarısız");
                 else {
-
+                    if (++testNesne.testArrayIndex == testNesne.testArray.length)
+                        testNesne.yazdir();
+                    else
+                        $.DatabasePostTest.DatabaseKullaniciKayit1()
                 }
-                testNesne.yazdir();
+
             });
         },
 
@@ -450,6 +460,11 @@ $(function name() {
 
     let testNesne = new Test();
     testNesne.genelTest();
+    function hirrrim(params) {
+        console.log(params);
+    }
+    let a = hirrrim
+
 
     //http://localhost/mongoMysql/index_Test.php
 });

@@ -25,6 +25,23 @@ abstract class BaseTemplate
     abstract public function template();
     protected function ajaxGonder()
     {echo json_encode($this->getSonucDiziEleman("ajaxData"));}
+
+    protected function post_Kontrol($key_Array)
+    {
+        $kontrol[] = false;
+        for ($i = 0; $i < count($key_Array); $i++) {
+            if (!(isset($_POST[$key_Array[$i]]))) {
+                $kontrol[0] = true;
+                $kontrol["Post_Hatasi"] = "Post Eksikliği";
+                break;
+            } else if (!(strlen($_POST[$key_Array[$i]]) >= 4)) {
+                $kontrol[0] = true;
+                $kontrol["Post_Hatasi"] = "Post İçerik Eksikliği";
+                break;
+            }
+        }
+        return $kontrol;
+    }
 }
 class Kullanici
 {
@@ -72,5 +89,44 @@ class VeriTabaniKey
     public static function keyHazirla()
     {
         return md5(rand(0, 1000) . time() . rand(0, 1000));
+    }
+}
+
+class PostKontrolData
+{
+    private static $key_Array;
+
+    public static function KullaniciKayitData()
+    {
+        PostKontrolData::$key_Array = [0 => "mail", 1 => "sifre", 2 => "kullaniciAd", 3 => "kullaniciSoyAd"];
+    }
+    public static function KullaniciGirisData()
+    {
+        PostKontrolData::$key_Array = [0 => "mail", 1 => "sifre"];
+    }
+    public static function KonuSilData()
+    {
+        PostKontrolData::$key_Array = [0 => "konuKey"];
+    }
+    public static function YorumSilData()
+    {
+        PostKontrolData::$key_Array = [0 => "yorumKey", 1 => "parentKey"];
+    }
+    public static function KonuAcData()
+    {
+        PostKontrolData::$key_Array = [0 => "konu", 1 => "yazilanMetin"];
+    }
+    public static function YorumYapData()
+    {
+        PostKontrolData::$key_Array = [0 => "parentKey", 1 => "yazilanMetin"];
+    }
+    public static function YorumGetirData()
+    {
+        PostKontrolData::$key_Array = [0 => "parentKey"];
+    }
+
+    public static function getKey_Array()
+    {
+        return PostKontrolData::$key_Array;
     }
 }

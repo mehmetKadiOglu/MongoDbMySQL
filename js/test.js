@@ -322,7 +322,7 @@ $(function name() {
             let data = 'kullaniciAd=&kullaniciSoyAd=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 1 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Kayit Test 1 başarısız");
                 $.DatabasePostTest.DatabaseYorumKayit2();
 
             });
@@ -332,7 +332,7 @@ $(function name() {
             let data = 'yazilanMetin=&parentKey=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 2 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Kayit Test 2 başarısız");
                 $.DatabasePostTest.DatabaseYorumKayit3();
             });
         },
@@ -341,7 +341,7 @@ $(function name() {
             let data = 'yazilanMetin=sadsa&parentKey=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 3 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Kayit Test 3 başarısız");
                 $.DatabasePostTest.DatabaseYorumKayit4();
             });
         },
@@ -350,10 +350,50 @@ $(function name() {
             let data = 'yazilanMetin=deneme123&parentKey=' + testNesne.konuAnahtar + '&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 4 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Kayit Test 4 başarısız");
                 else {
                     testNesne.yorumAnahtar = sonuc["anahtar"];
                 }
+                $.DatabasePostTest.DatabaseYorumGetir1();
+            });
+        },
+
+
+
+        DatabaseYorumGetir1: function () {
+            testNesne.testMiktari++;
+            let data = 'aa=&Command=yorumlariGetir&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Getir Test 1 başarısız");
+                $.DatabasePostTest.DatabaseYorumGetir2();
+
+            });
+        },
+        DatabaseYorumGetir2: function () {
+            testNesne.testMiktari++;
+            let data = 'parentKey=&Command=yorumlariGetir&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Getir Test 2 başarısız");
+                $.DatabasePostTest.DatabaseYorumGetir3();
+            });
+        },
+        DatabaseYorumGetir3: function () {
+            testNesne.testMiktari++;
+            let data = 'parentKey=aa&Command=yorumlariGetir&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Getir Test 3 başarısız");
+                $.DatabasePostTest.DatabaseYorumGetir4();
+            });
+        },
+        DatabaseYorumGetir4: function () {
+            testNesne.testMiktari++;
+            let data = 'parentKey=' + testNesne.konuAnahtar + '&Command=yorumlariGetir&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if ((sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Getir Test 4 başarısız");
                 $.DatabasePostTest.DatabaseYorumSil1();
             });
         },
@@ -367,7 +407,7 @@ $(function name() {
             let data = 'aa=&bb=&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 1 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Sil Test 1 başarısız");
                 $.DatabasePostTest.DatabaseYorumSil2();
 
             });
@@ -377,7 +417,7 @@ $(function name() {
             let data = 'yorumKey=&parentKey=&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 2 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Sil Test 2 başarısız");
                 $.DatabasePostTest.DatabaseYorumSil3();
             });
         },
@@ -386,7 +426,7 @@ $(function name() {
             let data = 'yorumKey=&parentKey=aaaa&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 3 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Sil Test 3 başarısız");
                 $.DatabasePostTest.DatabaseYorumSil4();
             });
         },
@@ -395,7 +435,7 @@ $(function name() {
             let data = 'yorumKey=' + testNesne.yorumAnahtar + '&parentKey=' + testNesne.konuAnahtar + '&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 4 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Sil Test 4 başarısız");
                 else {
 
                 }
@@ -412,7 +452,7 @@ $(function name() {
             let data = 'aa=&Command=konuSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 1 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Sil Test 1 başarısız");
                 $.DatabasePostTest.DatabaseKonuSil2();
 
             });
@@ -422,7 +462,7 @@ $(function name() {
             let data = 'konuKey=&Command=konuSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 2 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Sil Test 2 başarısız");
                 $.DatabasePostTest.DatabaseKonuSil3();
             });
         },
@@ -431,7 +471,7 @@ $(function name() {
             let data = 'konuKey=a&Command=konuSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 3 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Sil Test 3 başarısız");
                 $.DatabasePostTest.DatabaseKonuSil4();
             });
         },
@@ -440,7 +480,7 @@ $(function name() {
             let data = 'konuKey=' + testNesne.konuAnahtar + '&Command=konuSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
-                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 4 başarısız");
+                    testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Sil Test 4 başarısız");
                 else {
                     if (++testNesne.testArrayIndex == testNesne.testArray.length)
                         testNesne.yazdir();

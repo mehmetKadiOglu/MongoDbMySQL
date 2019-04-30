@@ -20,23 +20,6 @@ abstract class NoSqlTemplate extends BaseTemplate
     abstract protected function veritabaniIslem($data);
     abstract protected function collectionSec();
 
-    protected function post_Kontrol($key_Array)
-    {
-        $kontrol[] = false;
-        for ($i = 0; $i < count($key_Array); $i++) {
-            if (!(isset($_POST[$key_Array[$i]]))) {
-                $kontrol[0] = true;
-                $kontrol["Post_Hatasi"] = "Post Eksikliği";
-                break;
-            } else if (!(strlen($_POST[$key_Array[$i]]) >= 2)) {
-                $kontrol[0] = true;
-                $kontrol["Post_Hatasi"] = "Post İçerik Eksikliği";
-                break;
-            }
-        }
-        return $kontrol;
-    }
-
     public function template()
     {
 
@@ -63,15 +46,12 @@ abstract class KullaniciCollection extends NoSqlTemplate
 abstract class MongoDbGirisTemplate extends KullaniciCollection
 {
 
-    private function keyArrayHazirla()
-    {
-        $key_Array = [0 => "mail", 1 => "sifre"];
-        return $key_Array;
-    }
     protected function veritabaniSorguData()
     {
 
-        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
+        PostKontrolData::KullaniciGirisData();
+        $kontrolArray = $this->post_Kontrol(PostKontrolData::getKey_Array());
+
         if ($kontrolArray[0]) {
             return $kontrolArray["Post_Hatasi"];
         } else {
@@ -98,14 +78,12 @@ abstract class MongoDbGirisTemplate extends KullaniciCollection
 abstract class MongoDbKayitYapTemplate extends KullaniciCollection
 {
 
-    private function keyArrayHazirla()
-    {
-        $key_Array = [0 => "mail", 1 => "sifre", 2 => "kullaniciAd", 3 => "kullaniciSoyAd"];
-        return $key_Array;
-    }
     protected function veritabaniSorguData()
     {
-        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
+
+        PostKontrolData::KullaniciKayitData();
+        $kontrolArray = $this->post_Kontrol(PostKontrolData::getKey_Array());
+
         if ($kontrolArray[0]) {
             return $kontrolArray["Post_Hatasi"];
         } else {
@@ -173,31 +151,36 @@ abstract class MongoDbYorumlariGetirTemplate extends MetinCollection
     protected function veritabaniSorguData()
     {
 
-        $array["aranan"] = ['_id' => $_POST['parentKey']];
-        $array["kisitlayici"] = ['projection' => ['altYorum' => 1, '_id' => 0]];
-        return $array;
+        PostKontrolData::YorumGetirData();
+        $kontrolArray = $this->post_Kontrol(PostKontrolData::getKey_Array());
+
+        if ($kontrolArray[0]) {
+            return $kontrolArray["Post_Hatasi"];
+        } else {
+            $array["aranan"] = ['_id' => $_POST['parentKey']];
+            $array["kisitlayici"] = ['projection' => ['altYorum' => 1, '_id' => 0]];
+            return $array;
+        }
 
     }
     protected function veritabaniIslem($data)
     {
-
-        $this->setSonucDiziEleman("data", array_reverse($this->getDb()->getData($data["aranan"], $data["kisitlayici"])));
+        if (!(is_array($data))) {
+            $this->setSonucDiziEleman("Post_Hatasi", $data);
+            $this->setSonucDiziAjaxEleman("Post_Hatasi", $data);
+        } else {
+            $this->setSonucDiziEleman("data", array_reverse($this->getDb()->getData($data["aranan"], $data["kisitlayici"])));
+        }
 
     }
 }
 
 abstract class MongoDbKonuSilTemplate extends MetinCollection
 {
-
-    private function keyArrayHazirla()
-    {
-        $key_Array = [0 => "konuKey"];
-        return $key_Array;
-    }
-
     protected function veritabaniSorguData()
     {
-        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
+        PostKontrolData::KonuSilData();
+        $kontrolArray = $this->post_Kontrol(PostKontrolData::getKey_Array());
 
         if ($kontrolArray[0]) {
             return $kontrolArray["Post_Hatasi"];
@@ -221,14 +204,11 @@ abstract class MongoDbKonuSilTemplate extends MetinCollection
 
 abstract class MongoDbYorumSilTemplate extends MetinCollection
 {
-    private function keyArrayHazirla()
-    {
-        $key_Array = [0 => "yorumKey", 1 => "parentKey"];
-        return $key_Array;
-    }
     protected function veritabaniSorguData()
     {
-        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
+
+        PostKontrolData::YorumSilData();
+        $kontrolArray = $this->post_Kontrol(PostKontrolData::getKey_Array());
 
         if ($kontrolArray[0]) {
             return $kontrolArray["Post_Hatasi"];
@@ -268,15 +248,11 @@ abstract class MongoDbKonuYorumAcTemplate extends MetinCollection
 abstract class MongoDbKonuAcTemplate extends MongoDbKonuYorumAcTemplate
 {
 
-    private function keyArrayHazirla()
-    {
-        $key_Array = [0 => "konu", 1 => "yazilanMetin"];
-        return $key_Array;
-    }
     protected function veritabaniSorguData()
     {
 
-        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
+        PostKontrolData::KonuAcData();
+        $kontrolArray = $this->post_Kontrol(PostKontrolData::getKey_Array());
 
         if ($kontrolArray[0]) {
             return $kontrolArray["Post_Hatasi"];
@@ -306,14 +282,10 @@ abstract class MongoDbKonuAcTemplate extends MongoDbKonuYorumAcTemplate
 abstract class MongoDbYorumYapTemplate extends MongoDbKonuYorumAcTemplate
 {
 
-    private function keyArrayHazirla()
-    {
-        $key_Array = [0 => "parentKey", 1 => "yazilanMetin"];
-        return $key_Array;
-    }
     protected function veritabaniSorguData()
     {
-        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
+        PostKontrolData::YorumYapData();
+        $kontrolArray = $this->post_Kontrol(PostKontrolData::getKey_Array());
 
         if ($kontrolArray[0]) {
             return $kontrolArray["Post_Hatasi"];

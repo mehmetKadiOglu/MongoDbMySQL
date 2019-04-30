@@ -188,35 +188,65 @@ abstract class MongoDbYorumlariGetirTemplate extends MetinCollection
 
 abstract class MongoDbKonuSilTemplate extends MetinCollection
 {
+
+    private function keyArrayHazirla()
+    {
+        $key_Array = [0 => "konuKey"];
+        return $key_Array;
+    }
+
     protected function veritabaniSorguData()
     {
+        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
 
-        $array["dataId"] = ['_id' => $_POST['konuKey']];
-        return $array;
+        if ($kontrolArray[0]) {
+            return $kontrolArray["Post_Hatasi"];
+        } else {
+            $array["dataId"] = ['_id' => $_POST['konuKey']];
+            return $array;
+        }
 
     }
     protected function veritabaniIslem($data)
     {
-
-        $this->setSonucDiziEleman("basariDurum", $this->getDb()->delete($data["dataId"]));
+        if (!(is_array($data))) {
+            $this->setSonucDiziEleman("Post_Hatasi", $data);
+            $this->setSonucDiziAjaxEleman("Post_Hatasi", $data);
+        } else {
+            $this->setSonucDiziEleman("basariDurum", $this->getDb()->delete($data["dataId"]));
+        }
 
     }
 }
 
 abstract class MongoDbYorumSilTemplate extends MetinCollection
 {
+    private function keyArrayHazirla()
+    {
+        $key_Array = [0 => "yorumKey", 1 => "parentKey"];
+        return $key_Array;
+    }
     protected function veritabaniSorguData()
     {
+        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
 
-        $array["dataId"] = ['_id' => $_POST['parentKey']];
-        $array["secici"] = ['$pull' => ['altYorum' => ['_id' => $_POST['yorumKey']]]];
-        return $array;
+        if ($kontrolArray[0]) {
+            return $kontrolArray["Post_Hatasi"];
+        } else {
+            $array["dataId"] = ['_id' => $_POST['parentKey']];
+            $array["secici"] = ['$pull' => ['altYorum' => ['_id' => $_POST['yorumKey']]]];
+            return $array;
+        }
 
     }
     protected function veritabaniIslem($data)
     {
-
-        $this->setSonucDiziEleman("basariDurum", $this->getDb()->update($data["dataId"], $data["secici"]));
+        if (!(is_array($data))) {
+            $this->setSonucDiziEleman("Post_Hatasi", $data);
+            $this->setSonucDiziAjaxEleman("Post_Hatasi", $data);
+        } else {
+            $this->setSonucDiziEleman("basariDurum", $this->getDb()->update($data["dataId"], $data["secici"]));
+        }
 
     }
 }
@@ -238,20 +268,37 @@ abstract class MongoDbKonuYorumAcTemplate extends MetinCollection
 abstract class MongoDbKonuAcTemplate extends MongoDbKonuYorumAcTemplate
 {
 
+    private function keyArrayHazirla()
+    {
+        $key_Array = [0 => "konu", 1 => "yazilanMetin"];
+        return $key_Array;
+    }
     protected function veritabaniSorguData()
     {
 
-        parent::veritabaniSorguData();
-        $data = $this->getSonucDiziEleman("ortakArray");
+        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
 
-        $data["konu"] = $_POST['konu'];
-        return $data;
+        if ($kontrolArray[0]) {
+            return $kontrolArray["Post_Hatasi"];
+        } else {
+            parent::veritabaniSorguData();
+            $data = $this->getSonucDiziEleman("ortakArray");
+
+            $data["konu"] = $_POST['konu'];
+            return $data;
+        }
+
     }
 
     protected function veritabaniIslem($data)
     {
 
-        $this->setSonucDiziEleman("key", $this->getDb()->insert($data));
+        if (!(is_array($data))) {
+            $this->setSonucDiziEleman("Post_Hatasi", $data);
+            $this->setSonucDiziAjaxEleman("Post_Hatasi", $data);
+        } else {
+            $this->setSonucDiziEleman("key", $this->getDb()->insert($data));
+        }
 
     }
 
@@ -259,23 +306,37 @@ abstract class MongoDbKonuAcTemplate extends MongoDbKonuYorumAcTemplate
 abstract class MongoDbYorumYapTemplate extends MongoDbKonuYorumAcTemplate
 {
 
+    private function keyArrayHazirla()
+    {
+        $key_Array = [0 => "parentKey", 1 => "yazilanMetin"];
+        return $key_Array;
+    }
     protected function veritabaniSorguData()
     {
+        $kontrolArray = $this->post_Kontrol($this->keyArrayHazirla());
 
-        parent::veritabaniSorguData();
+        if ($kontrolArray[0]) {
+            return $kontrolArray["Post_Hatasi"];
+        } else {
+            parent::veritabaniSorguData();
 
-        $data = $this->getSonucDiziEleman("ortakArray");
+            $data = $this->getSonucDiziEleman("ortakArray");
 
-        $data["eklencek_Veri"] = array('$push' => array('altYorum' => $data));
-        $data["aranan"] = ['_id' => $_POST['parentKey']];
+            $data["eklencek_Veri"] = array('$push' => array('altYorum' => $data));
+            $data["aranan"] = ['_id' => $_POST['parentKey']];
 
-        return $data;
-
+            return $data;
+        }
     }
     protected function veritabaniIslem($data)
     {
 
-        $this->setSonucDiziEleman("key", $this->getDb()->update($data["aranan"], $data["eklencek_Veri"]));
+        if (!(is_array($data))) {
+            $this->setSonucDiziEleman("Post_Hatasi", $data);
+            $this->setSonucDiziAjaxEleman("Post_Hatasi", $data);
+        } else {
+            $this->setSonucDiziEleman("key", $this->getDb()->update($data["aranan"], $data["eklencek_Veri"]));
+        }
 
     }
 }

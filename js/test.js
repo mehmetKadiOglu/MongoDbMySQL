@@ -35,6 +35,8 @@ $(function name() {
 
             this.testMiktari = 0;
             this.basarisizTestler = [];
+            this.konuAnahtar = "";
+            this.yorumAnahtar = "";
 
         }
 
@@ -233,7 +235,7 @@ $(function name() {
         },
         MongoDbKullaniciGiris2: function () {
             testNesne.testMiktari++;
-            let data = 'mail=&sifre=&Command=girisYap&BaseCommand=MongoDbCommand'
+            let data = 'mail=&sifre=&Command=girisYap&BaseCommand=MongoDbCommand';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 2 başarısız");
@@ -242,7 +244,7 @@ $(function name() {
         },
         MongoDbKullaniciGiris3: function () {
             testNesne.testMiktari++;
-            let data = 'mail=&sifre=test&Command=girisYap&BaseCommand=MongoDbCommand'
+            let data = 'mail=&sifre=test&Command=girisYap&BaseCommand=MongoDbCommand';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 3 başarısız");
@@ -251,13 +253,194 @@ $(function name() {
         },
         MongoDbKullaniciGiris4: function () {
             testNesne.testMiktari++;
-            let data = 'mail=test@test&sifre=test&Command=girisYap&BaseCommand=MongoDbCommand'
+            let data = 'mail=test@test&sifre=test&Command=girisYap&BaseCommand=MongoDbCommand';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push("MongoDb Kullanici Giris Test 4 başarısız");
+
+                $.MongoDbTest.MongoDbKonuKayit1();
+            });
+        },
+
+
+
+
+        MongoDbKonuKayit1: function () {
+            testNesne.testMiktari++;
+            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=konuAc&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 1 başarısız");
+                $.MongoDbTest.MongoDbKonuKayit2();
+
+            });
+        },
+        MongoDbKonuKayit2: function () {
+            testNesne.testMiktari++;
+            let data = 'konu=&yazilanMetin=&Command=konuAc&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 2 başarısız");
+                $.MongoDbTest.MongoDbKonuKayit3();
+            });
+        },
+        MongoDbKonuKayit3: function () {
+            testNesne.testMiktari++;
+            let data = 'konu=&yazilanMetin=jhjhj&Command=konuAc&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 3 başarısız");
+                else
+                    $.MongoDbTest.MongoDbKonuKayit4();
+            });
+        },
+        MongoDbKonuKayit4: function () {
+            testNesne.testMiktari++;
+            let data = 'konu=deneme12&yazilanMetin=deneme12&Command=konuAc&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if ((sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 4 başarısız");
+                else {
+                    testNesne.konuAnahtar = sonuc["anahtar"];
+                    $.MongoDbTest.MongoDbYorumKayit1();
+                }
+            });
+        },
+
+
+
+        MongoDbYorumKayit1: function () {
+
+            testNesne.testMiktari++;
+            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=yorumYap&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 1 başarısız");
+                $.MongoDbTest.MongoDbYorumKayit2();
+
+            });
+        },
+        MongoDbYorumKayit2: function () {
+            testNesne.testMiktari++;
+            let data = 'yazilanMetin=&parentKey=&Command=yorumYap&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 2 başarısız");
+                $.MongoDbTest.MongoDbYorumKayit3();
+            });
+        },
+        MongoDbYorumKayit3: function () {
+            testNesne.testMiktari++;
+            let data = 'yazilanMetin=sadsa&parentKey=&Command=yorumYap&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 3 başarısız");
+                $.MongoDbTest.MongoDbYorumKayit4();
+            });
+        },
+        MongoDbYorumKayit4: function () {
+            testNesne.testMiktari++;
+            let data = 'yazilanMetin=deneme123&parentKey=' + testNesne.konuAnahtar + '&Command=yorumYap&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if ((sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 4 başarısız");
+                else {
+                    testNesne.yorumAnahtar = sonuc["anahtar"];
+                }
+                $.MongoDbTest.MongoDbYorumSil1();
+            });
+        },
+
+
+
+
+        MongoDbYorumSil1: function () {
+
+            testNesne.testMiktari++;
+            let data = 'aa=&bb=&Command=yorumSil&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 1 başarısız");
+                $.MongoDbTest.MongoDbYorumSil2();
+
+            });
+        },
+        MongoDbYorumSil2: function () {
+            testNesne.testMiktari++;
+            let data = 'yorumKey=&parentKey=&Command=yorumSil&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 2 başarısız");
+                $.MongoDbTest.MongoDbYorumSil3();
+            });
+        },
+        MongoDbYorumSil3: function () {
+            testNesne.testMiktari++;
+            let data = 'yorumKey=&parentKey=aaaa&Command=yorumSil&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 3 başarısız");
+                $.MongoDbTest.MongoDbYorumSil4();
+            });
+        },
+        MongoDbYorumSil4: function () {
+            testNesne.testMiktari++;
+            let data = 'yorumKey=' + testNesne.yorumAnahtar + '&parentKey=' + testNesne.konuAnahtar + '&Command=yorumSil&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if ((sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 4 başarısız");
+                else {
+
+                }
+                $.MongoDbTest.MongoDbKonuSil1();
+            });
+        },
+
+
+
+
+        MongoDbKonuSil1: function () {
+
+            testNesne.testMiktari++;
+            let data = 'aa=&Command=konuSil&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 1 başarısız");
+                $.MongoDbTest.MongoDbKonuSil2();
+
+            });
+        },
+        MongoDbKonuSil2: function () {
+            testNesne.testMiktari++;
+            let data = 'konuKey=&Command=konuSil&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 2 başarısız");
+                $.MongoDbTest.MongoDbKonuSil3();
+            });
+        },
+        MongoDbKonuSil3: function () {
+            testNesne.testMiktari++;
+            let data = 'konuKey=a&Command=konuSil&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 3 başarısız");
+                $.MongoDbTest.MongoDbKonuSil4();
+            });
+        },
+        MongoDbKonuSil4: function () {
+            testNesne.testMiktari++;
+            let data = 'konuKey=' + testNesne.konuAnahtar + '&Command=konuSil&BaseCommand=MongoDbCommand';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if ((sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("MongoDb Konu Kayit Test 4 başarısız");
+                else {
+
+                }
                 testNesne.yazdir();
             });
-        }
+        },
+
 
 
     }
@@ -268,4 +451,5 @@ $(function name() {
     let testNesne = new Test();
     testNesne.genelTest();
 
+    //http://localhost/mongoMysql/index_Test.php
 });

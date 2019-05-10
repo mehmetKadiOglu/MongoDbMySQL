@@ -99,98 +99,63 @@ $(function name() {
 
                 if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 4 başarısız");
-                $.CommandTest.MongoDbCommandTest1();
+                $.CommandTest.SqlNoSqlCommandTest1();
             });
 
         },
 
 
-        MongoDbCommandTest1: function () {
+        SqlNoSqlCommandTest1: function () {
             testNesne.testMiktari++;
-            let data = "BaseCommand=MongoDbCommand&Command=";
+            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Command=';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (sonuc != "MongoDbCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 1 başarısız");
-                $.CommandTest.MongoDbCommandTest2();
+                $.CommandTest.SqlNoSqlCommandTest2();
             });
 
         },
-        MongoDbCommandTest2: function () {
+        SqlNoSqlCommandTest2: function () {
             testNesne.testMiktari++;
-            let data = "BaseCommand=MongoDbCommand&Command=ari";
+            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Command=ari';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (sonuc != "MongoDbCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 2 başarısız");
-                $.CommandTest.MongoDbCommandTest3();
+                $.CommandTest.SqlNoSqlCommandTest3();
             });
 
         },
-        MongoDbCommandTest3: function () {
+        SqlNoSqlCommandTest3: function () {
             testNesne.testMiktari++;
-            let data = "BaseCommand=MongoDbCommand";
+            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (sonuc != "MongoDCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 3 başarısız");
-                $.CommandTest.MongoDbCommandTest4();
+                $.CommandTest.SqlNoSqlCommandTest4();
             });
 
         },
-        MongoDbCommandTest4: function () {
+        SqlNoSqlCommandTest4: function () {
             testNesne.testMiktari++;
-            let data = "BaseCommand=MongoDbCommand&Komutum=kayit";
+            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Komutum=kayit';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (sonuc != "MongoDCommandHatasi")
                     testNesne.basarisizTestler.push("MongoDb Command Test 4 başarısız");
-                $.CommandTest.MySqlCommandTest1();
-            });
-
-        },
-
-
-        MySqlCommandTest1: function () {
-            testNesne.testMiktari++;
-            let data = "BaseCommand=MysqlCommand&Command=";
-            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MySqlCommandHatasi")
-                    testNesne.basarisizTestler.push("MySql Command Test 1 başarısız");
-                $.CommandTest.MySqlCommandTest2();
-            });
-
-        },
-        MySqlCommandTest2: function () {
-            testNesne.testMiktari++;
-            let data = "BaseCommand=MysqlCommand&Command=ari";
-            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MySqlCommandHatasi")
-                    testNesne.basarisizTestler.push("MySql Command Test 2 başarısız");
-                $.CommandTest.MySqlCommandTest3();
-            });
-
-        },
-        MySqlCommandTest3: function () {
-            testNesne.testMiktari++;
-            let data = "BaseCommand=MysqlCommand";
-            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MySqlCommandHatasi")
-                    testNesne.basarisizTestler.push("MySql Command Test 3 başarısız");
-                $.CommandTest.MySqlCommandTest4();
-            });
-
-        },
-        MySqlCommandTest4: function () {
-            testNesne.testMiktari++;
-            let data = "BaseCommand=MysqlCommand&Komutum=kayit";
-            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MySqlCommandHatasi")
-                    testNesne.basarisizTestler.push("MySql Command Test 4 başarısız");
                 else {
-                    $.DatabasePostTest.DatabaseKullaniciKayit1();
+                    if (++testNesne.testArrayIndex == testNesne.testArray.length) {
+                        testNesne.testArrayIndex = 0;
+                        $.DatabasePostTest.DatabaseKullaniciKayit1();
+                    }
+                    else
+                        $.CommandTest.SqlNoSqlCommandTest1();
                 }
-
             });
-        }
+
+        },
     }
     $.DatabasePostTest = {
+
+
 
         DatabaseKullaniciKayit1: function () {
             testNesne.testMiktari++;
@@ -494,16 +459,9 @@ $(function name() {
 
 
     }
-    $.MySqlTest = {
-
-    }
 
     let testNesne = new Test();
     testNesne.genelTest();
-    function hirrrim(params) {
-        console.log(params);
-    }
-    let a = hirrrim
 
 
     //http://localhost/mongoMysql/index_Test.php

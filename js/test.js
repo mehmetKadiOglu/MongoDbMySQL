@@ -62,7 +62,6 @@ $(function name() {
             testNesne.testMiktari++;
             let data = "BaseCommand=";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-
                 if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 1 başarısız");
 
@@ -75,7 +74,6 @@ $(function name() {
             testNesne.testMiktari++;
             let data = "BaseCommand=mongo";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-
                 if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 2 başarısız");
                 $.CommandTest.BaseCommandTest3();
@@ -96,10 +94,28 @@ $(function name() {
             testNesne.testMiktari++;
             let data = "Command=MongoDbCommand";
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-
                 if (sonuc != "BaseCommandHatasi")
                     testNesne.basarisizTestler.push("Base Command Test 4 başarısız");
-                $.CommandTest.SqlNoSqlCommandTest1();
+                $.CommandTest.BaseCommandTest5();
+            });
+
+        },
+        BaseCommandTest5: function () {
+            testNesne.testMiktari++;
+            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (sonuc != (testNesne.testArray[testNesne.testArrayIndex]) + "Hatasi") {
+                    testNesne.basarisizTestler.push("Base Command Test 5 başarısız => " + testNesne.testArray[testNesne.testArrayIndex]);
+                }
+
+                else {
+                    if (++testNesne.testArrayIndex == testNesne.testArray.length) {
+                        testNesne.testArrayIndex = 0;
+                        $.CommandTest.SqlNoSqlCommandTest1();
+                    }
+                    else
+                        $.CommandTest.BaseCommandTest5();
+                }
             });
 
         },
@@ -109,8 +125,8 @@ $(function name() {
             testNesne.testMiktari++;
             let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Command=';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MongoDbCommandHatasi")
-                    testNesne.basarisizTestler.push("MongoDb Command Test 1 başarısız");
+                if (sonuc != (testNesne.testArray[testNesne.testArrayIndex]) + "Hatasi")
+                    testNesne.basarisizTestler.push("SqlNoSqlCommandTest1 başarısız => " + testNesne.testArray[testNesne.testArrayIndex]);
                 $.CommandTest.SqlNoSqlCommandTest2();
             });
 
@@ -119,8 +135,8 @@ $(function name() {
             testNesne.testMiktari++;
             let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Command=ari';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MongoDbCommandHatasi")
-                    testNesne.basarisizTestler.push("MongoDb Command Test 2 başarısız");
+                if (sonuc != (testNesne.testArray[testNesne.testArrayIndex]) + "Hatasi")
+                    testNesne.basarisizTestler.push("SqlNoSqlCommandTest2 başarısız => " + testNesne.testArray[testNesne.testArrayIndex]);
                 $.CommandTest.SqlNoSqlCommandTest3();
             });
 
@@ -129,18 +145,28 @@ $(function name() {
             testNesne.testMiktari++;
             let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MongoDCommandHatasi")
-                    testNesne.basarisizTestler.push("MongoDb Command Test 3 başarısız");
+                if (sonuc != (testNesne.testArray[testNesne.testArrayIndex]) + "Hatasi")
+                    testNesne.basarisizTestler.push("SqlNoSqlCommandTest3 başarısız => " + testNesne.testArray[testNesne.testArrayIndex]);
                 $.CommandTest.SqlNoSqlCommandTest4();
             });
 
         },
         SqlNoSqlCommandTest4: function () {
             testNesne.testMiktari++;
+            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Command=yorumYap';
+            $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
+                if (!(sonuc.hasOwnProperty("Post_Hatasi")))
+                    testNesne.basarisizTestler.push("SqlNoSqlCommandTest4 başarısız => " + testNesne.testArray[testNesne.testArrayIndex]);
+                $.CommandTest.SqlNoSqlCommandTest5();
+            });
+
+        },
+        SqlNoSqlCommandTest5: function () {
+            testNesne.testMiktari++;
             let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Komutum=kayit';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
-                if (sonuc != "MongoDCommandHatasi")
-                    testNesne.basarisizTestler.push("MongoDb Command Test 4 başarısız");
+                if (sonuc != (testNesne.testArray[testNesne.testArrayIndex]) + "Hatasi")
+                    testNesne.basarisizTestler.push("SqlNoSqlCommandTest5 başarısız => " + testNesne.testArray[testNesne.testArrayIndex]);
                 else {
                     if (++testNesne.testArrayIndex == testNesne.testArray.length) {
                         testNesne.testArrayIndex = 0;
@@ -168,7 +194,7 @@ $(function name() {
         },
         DatabaseKullaniciKayit2: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=aaa&kullaniciSoyAd=bbb&mail=ccc&Command=kayitYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'kullaniciAd=test&kullaniciSoyAd=test&Command=kayitYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Kayit Test 2 başarısız");
@@ -177,7 +203,7 @@ $(function name() {
         },
         DatabaseKullaniciKayit3: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=aaa&kullaniciSoyAd=bbb&mail=ccc&sifre=&Command=kayitYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'kullaniciAd=test&kullaniciSoyAd=&mail=&sifre=test&Command=kayitYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Kayit Test 3 başarısız");
@@ -197,7 +223,7 @@ $(function name() {
 
         DatabaseKullaniciGiris1: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=girisYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'kullaniciAd=test&sifre=&Command=girisYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Kullanici Giris Test 1 başarısız");
@@ -239,7 +265,7 @@ $(function name() {
 
         DatabaseKonuKayit1: function () {
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'Test=&Test2=&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 1 başarısız");
@@ -258,7 +284,7 @@ $(function name() {
         },
         DatabaseKonuKayit3: function () {
             testNesne.testMiktari++;
-            let data = 'konu=&yazilanMetin=jhjhj&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'konu=&yazilanMetin=test&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 3 başarısız");
@@ -268,7 +294,7 @@ $(function name() {
         },
         DatabaseKonuKayit4: function () {
             testNesne.testMiktari++;
-            let data = 'konu=deneme12&yazilanMetin=deneme12&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'konu=testMetin&yazilanMetin=testMetin&Command=konuAc&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Konu Kayit Test 4 başarısız");
@@ -284,7 +310,7 @@ $(function name() {
         DatabaseYorumKayit1: function () {
 
             testNesne.testMiktari++;
-            let data = 'kullaniciAd=&kullaniciSoyAd=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'Test=&yazilanMetin=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Kayit Test 1 başarısız");
@@ -303,7 +329,7 @@ $(function name() {
         },
         DatabaseYorumKayit3: function () {
             testNesne.testMiktari++;
-            let data = 'yazilanMetin=sadsa&parentKey=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'yazilanMetin=test&parentKey=&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Kayit Test 3 başarısız");
@@ -312,7 +338,7 @@ $(function name() {
         },
         DatabaseYorumKayit4: function () {
             testNesne.testMiktari++;
-            let data = 'yazilanMetin=deneme123&parentKey=' + testNesne.konuAnahtar + '&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'yazilanMetin=deneme1&parentKey=' + testNesne.konuAnahtar + '&Command=yorumYap&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if ((sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Kayit Test 4 başarısız");
@@ -388,7 +414,7 @@ $(function name() {
         },
         DatabaseYorumSil3: function () {
             testNesne.testMiktari++;
-            let data = 'yorumKey=&parentKey=aaaa&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
+            let data = 'yorumKey=&parentKey=test&Command=yorumSil&BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex];
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (!(sonuc.hasOwnProperty("Post_Hatasi")))
                     testNesne.basarisizTestler.push(testNesne.testArray[testNesne.testArrayIndex] + " Yorum Sil Test 3 başarısız");

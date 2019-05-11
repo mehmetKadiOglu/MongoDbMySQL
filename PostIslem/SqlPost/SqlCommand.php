@@ -33,10 +33,10 @@ class MysqlCommand
             if (array_key_exists($_POST['Command'], $this->komutDizisi)) {
                 $this->komutDizisi[$_POST['Command']]->template();
             } else {
-                echo json_encode("MySqlCommandHatasi");
+                echo json_encode("MysqlCommandHatasi");
             }
         } else {
-            echo json_encode("MySqlCommandHatasi");
+            echo json_encode("MysqlCommandHatasi");
         }
 
     }

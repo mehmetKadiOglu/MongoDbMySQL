@@ -35,7 +35,7 @@ class MongoDbCommand
                 echo json_encode("MongoDbCommandHatasi");
             }
         } else {
-            echo json_encode("MongoDCommandHatasi");
+            echo json_encode("MongoDbCommandHatasi");
         }
 
     }

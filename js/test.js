@@ -133,7 +133,7 @@ $(function name() {
         },
         SqlNoSqlCommandTest2: function () {
             testNesne.testMiktari++;
-            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Command=ari';
+            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Command=test';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (sonuc != (testNesne.testArray[testNesne.testArrayIndex]) + "Hatasi")
                     testNesne.basarisizTestler.push("SqlNoSqlCommandTest2 başarısız => " + testNesne.testArray[testNesne.testArrayIndex]);
@@ -163,7 +163,7 @@ $(function name() {
         },
         SqlNoSqlCommandTest5: function () {
             testNesne.testMiktari++;
-            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Komutum=kayit';
+            let data = 'BaseCommand=' + testNesne.testArray[testNesne.testArrayIndex] + '&Komutum=yorumYap';
             $.PhpIslem.AjaxIslem(data).then(function (sonuc) {
                 if (sonuc != (testNesne.testArray[testNesne.testArrayIndex]) + "Hatasi")
                     testNesne.basarisizTestler.push("SqlNoSqlCommandTest5 başarısız => " + testNesne.testArray[testNesne.testArrayIndex]);
